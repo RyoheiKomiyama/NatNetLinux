@@ -8,7 +8,7 @@ SET( VERSION_MINOR 1 )
 SET( VERSION_PATCH 1 )
 SET( VERSION_STRING "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}" )
 
-OPTION( BUILD_EXAMPLES "If on, build executable examples." ON )
+OPTION( BUILD_EXAMPLES "If on, build executable examples." OFF )
 
 # Add custom CMakeModules path
 #SET( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules ${CMAKE_MODULE_PATH} )

@@ -212,6 +212,7 @@ public:
    float z;
 };
 
+/*
 //! \brief Output operator for Point3f.
 std::ostream& operator<<( std::ostream& s, Point3f const& point )
 {
@@ -228,6 +229,7 @@ std::ostream& operator<<( std::ostream& s, Point3f const& point )
    
    return s;
 }
+*/
 
 /*!
  * \brief Quaternion for 3D rotations and orientation
@@ -361,6 +363,7 @@ private:
    }
 };
 
+/*
 //! \brief Output operator for Quaternion4f.
 std::ostream& operator<<( std::ostream& s, Quaternion4f const& q )
 {
@@ -378,6 +381,7 @@ std::ostream& operator<<( std::ostream& s, Quaternion4f const& q )
    
    return s;
 }
+*/
 
 /*!
  * \brief Rigid body
@@ -531,6 +535,7 @@ private:
    bool _trackingValid;
 };
 
+/*
 //! \brief Output operator for RigidBody.
 std::ostream& operator<<( std::ostream& s, RigidBody const& body )
 {
@@ -541,6 +546,7 @@ std::ostream& operator<<( std::ostream& s, RigidBody const& body )
    
    return s;
 }
+*/
 
 /*!
  * \brief A set of markers
@@ -613,6 +619,7 @@ private:
    std::vector<Point3f> _markers;
 };
 
+/*
 //! \brief Output operator to print human-readable text describin a MarkerSet
 std::ostream& operator<<( std::ostream& s, MarkerSet const& set )
 {
@@ -629,6 +636,7 @@ std::ostream& operator<<( std::ostream& s, MarkerSet const& set )
    
    return s;
 }
+*/
 
 /*!
  * \brief A composition of rigid bodies
@@ -994,6 +1002,7 @@ private:
    uint32_t _subTimecode;
 };
 
+/*
 //! \brief For displaying human-readable MocapFrame data.
 std::ostream& operator<<(std::ostream& s, MocapFrame const& frame)
 {
@@ -1036,5 +1045,6 @@ std::ostream& operator<<(std::ostream& s, MocapFrame const& frame)
    s.flags(flags);
    return s;
 }
+*/
 
 #endif /*NATNET_H*/
