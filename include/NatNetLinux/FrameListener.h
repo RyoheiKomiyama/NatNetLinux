@@ -27,6 +27,33 @@
 #include <utility>
 #include <time.h>
 
+
+#ifdef __APPLE__ // only mac *************************************************
+#include <mach/mach_time.h>
+#define ORWL_NANO (+1.0E-9)
+#define ORWL_GIGA UINT64_C(1000000000)
+
+static double orwl_timebase = 0.0;
+static uint64_t orwl_timestart = 0;
+
+struct timespec orwl_gettime(void) {
+  // be more careful in a multithreaded environement
+  if (!orwl_timestart) {
+    mach_timebase_info_data_t tb = { 0 };
+    mach_timebase_info(&tb);
+    orwl_timebase = tb.numer;
+    orwl_timebase /= tb.denom;
+    orwl_timestart = mach_absolute_time();
+  }
+  struct timespec t;
+  double diff = (mach_absolute_time() - orwl_timestart) * orwl_timebase;
+  t.tv_sec = diff * ORWL_NANO;
+  t.tv_nsec = diff - (t.tv_sec * ORWL_GIGA);
+  return t;
+}
+#endif // ********************************************************************
+
+
 /*!
  * \brief Thread to listen for MocapFrame data.
  * \author Philip G. Lee
@@ -202,8 +229,12 @@ private:
          FD_ZERO(&rfds); FD_SET(sd, &rfds);
          if( !select(sd+1, &rfds, 0, 0, &timeout) )
             continue;
-         
+#ifdef __linux__         
          clock_gettime( CLOCK_REALTIME, &ts );
+#endif
+#ifdef __APPLE__
+         ts = orwl_gettime();
+#endif
          dataBytes = read( sd, nnp.rawPtr(), nnp.maxLength() );
          
          if( dataBytes > 0 && nnp.iMessage() == NatNetPacket::NAT_FRAMEOFDATA )
