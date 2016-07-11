@@ -100,7 +100,7 @@ public:
       }
       
       // Bind socket to the address.
-      tmp = bind( sd, (struct sockaddr*)&sockAddr, sizeof(sockAddr) );
+      tmp = ::bind( sd, (struct sockaddr*)&sockAddr, sizeof(sockAddr) );
       if( tmp < 0 )
       {
          std::cerr << "Could not bind socket. Error: " << errno << std::endl;
